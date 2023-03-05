@@ -14,9 +14,11 @@ void main() {
 
     for (int i = 0; i < iterationCount; i++) {
       final tsid = factory.generate().toInt();
-      if (tsidMap.putIfAbsent(tsid, () => tsid) != tsid) {
+      if (tsidMap.containsKey(tsid)) {
         fail('Collision detected');
       }
+
+      tsidMap.putIfAbsent(tsid, () => tsid);
     }
   });
 }
